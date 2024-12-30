@@ -29,7 +29,7 @@ This will install Pydantic AI, Streamlit, and all of their dependencies.
    ```env
    OPENAI_API_KEY=your_openai_api_key  # Only needed if using GPT models
    BRAVE_API_KEY=your_brave_api_key
-   LLM_MODEL=your_chosen_model  # e.g., gpt-4, qwen2.5:32b
+   LLM_MODEL=your_chosen_model  # e.g. gpt-4
    ```
 
 ## Usage
