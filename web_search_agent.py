@@ -71,6 +71,7 @@ async def search_web(
     }
     
     with logfire.span('calling Brave search API', params=params, headers=headers) as span:
+        print(f"WEB QUERY --> {web_query}")
         r = await ctx.deps.client.get(
             'https://api.search.brave.com/res/v1/web/search',
             params=params,
