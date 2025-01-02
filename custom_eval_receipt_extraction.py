@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from httpx import AsyncClient
 from rapidfuzz.distance import Levenshtein
 
-from receipt_extraction import Deps, Receipt, extraction_agent
+from document_extraction import Deps_Receipt, Receipt, receipt_extraction_agent
 from eval_receipt_extraction import load_receipt
 
 load_dotenv()
@@ -48,9 +48,9 @@ async def custom_evaluation(client):
         data = load_receipt(idx)
         reference_answers.append(data)
         
-        deps = Deps(client=client, index=idx, key="company")
-        result = await extraction_agent.run(
-            f'What is the {deps.key} in receipt index {deps.index}?', deps=deps
+        deps_receipt = Deps_Receipt(client=client, index=idx, key="company")
+        result = await receipt_extraction_agent.run(
+            f'What is the {deps_receipt.key} in receipt index {deps_receipt.index}?', deps=deps_receipt
         )
         model_answers.append(result.data)
         print(f'Response for receipt {idx}:', result.data)

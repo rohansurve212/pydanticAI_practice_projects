@@ -6,7 +6,7 @@ from httpx import AsyncClient
 from braintrust import EvalAsync
 from autoevals import Factuality, Levenshtein
 
-from receipt_extraction import Deps, extraction_agent
+from document_extraction import Deps_Receipt, receipt_extraction_agent
 
 load_dotenv()
 RAW_DATA_URL = os.getenv('RAW_DATA_URL')
@@ -34,9 +34,9 @@ async def braintrust_evaluation(client):
     ]
     
     async def task(input):
-        deps = Deps(client=client, index=input["idx"], key=input["key"])
-        return await extraction_agent.run(
-            f'What is the {deps.key} in receipt index {deps.index}?', deps=deps
+        deps_receipt = Deps_Receipt(client=client, index=input["idx"], key=input["key"])
+        return await receipt_extraction_agent.run(
+            f'What is the {deps_receipt.key} in receipt index {deps_receipt.index}?', deps=deps_receipt
         )
     
     await EvalAsync(
